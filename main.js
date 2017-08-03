@@ -15,28 +15,47 @@
 function handValue (hand) {
     let sum = 0;
     let cardValue = [];
-    let ace = 0;
-    //convert strings to numbers
+    let aces = 0;
+  //convert strings to numbers
 
     for (let i=0; i<hand.length; i++){
       if (hand[i] == "K" || hand[i] == "Q" || hand[i]== "J"){
         hand[i] = 10;
+        cardValue.push(hand[i]);
       }
-      //seperate the Aces
+  //seperate the Aces
       else if (hand[i] == ["A"]){
-        ace += hand[i];
-      }
-          cardValue.push(parseInt(hand[i], 10));
+        aces = aces + 1;
       }
 
-      //sum the value of the hand
+      else{
+          cardValue.push(parseInt(hand[i], 10));
+        }
+      }
+
+  //sum the value of the hand
 
       for (let s=0; s<cardValue.length; s++){
-        sum += cardValue[s];
-      }
 
-      console.log(sum);
+        sum += cardValue[s];
+        }
+//sum for hands with Aces
+      for ( let a=0; a<aces; a++){
+        if ((aces > 0) && (sum > 11)) {
+          let ace = 1;
+          sum = ace + sum;
+        }
+
+        else if ((aces > 0) && (sum < 11)){
+           ace = 11;
+          sum = ace + sum;
+          }
+        }
+
+//console.logged these items below to help me visualize and solve issues
       console.log(cardValue);
+      console.log(sum);
+      console.log(aces);
       return sum;
 }
 
